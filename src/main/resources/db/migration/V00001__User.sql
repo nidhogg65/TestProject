@@ -1,0 +1,6 @@
+CREATE TABLE USER (
+    ID          BIGINT          PRIMARY KEY,
+    EMAIL       VARCHAR(30)     NOT NULL,
+    PASSWORD    VARCHAR(30)     NOT NULL,
+    ROLE        SMALLINT        NOT NULL
+)
