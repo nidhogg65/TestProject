@@ -1,5 +1,5 @@
 CREATE TABLE USER (
-    ID          BIGINT          PRIMARY KEY,
+    ID          BIGINT          PRIMARY KEY AUTO_INCREMENT,
     EMAIL       VARCHAR(30)     NOT NULL,
     PASSWORD    VARCHAR(30)     NOT NULL,
     ROLE        SMALLINT        NOT NULL

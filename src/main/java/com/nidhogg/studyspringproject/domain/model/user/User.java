@@ -1,16 +1,14 @@
 package com.nidhogg.studyspringproject.domain.model.user;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
@@ -27,6 +25,12 @@ public class User {
         // JPA constructor
     }
 
+    public User(String email, String password, Role role) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
     public Long getId() {
         return id;
     }
@@ -41,5 +45,15 @@ public class User {
 
     public Role getRole() {
         return role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                '}';
     }
 }
