@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, properties = "spring.h2.console.enabled=true")
 @FlywayTest
+@DBUnitSupport(loadFilesForRun = {"INSERT", "/testdata/user.xml"})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, FlywayDBUnitTestExecutionListener.class})
 public class UserRepositoryIntegrationTest {
 
@@ -23,8 +24,6 @@ public class UserRepositoryIntegrationTest {
     private UserRepository userRepository;
 
     @Test
-    @FlywayTest(invokeCleanDB = true)
-    @DBUnitSupport(loadFilesForRun = {"INSERT", "/testdata/user.xml"})
     public void shouldReturnUser_whenFindByEmail_givenExistingEmail() {
         //given
         User expectedUser = new User();
@@ -38,5 +37,23 @@ public class UserRepositoryIntegrationTest {
 
         // then
         assertThat(actualUser).isEqualToComparingFieldByField(expectedUser);
+    }
+
+    @Test
+    public void shouldReturnTrue_whenExistsUserByEmail_givenExistingEmail() {
+        // when
+        boolean actual = userRepository.existsUserByEmail("test1@gmail.com");
+
+        // then
+        assertThat(actual).isTrue();
+    }
+
+    @Test
+    public void shouldReturnFalse_whenExistsUserByEmail_givenNotExistingEmail() {
+        // when
+        boolean actual = userRepository.existsUserByEmail("notExisting@gmail.com");
+
+        // then
+        assertThat(actual).isFalse();
     }
 }
