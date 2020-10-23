@@ -1,31 +1,19 @@
-package com.nidhogg.studyspringproject.domain.model.user;
+package com.nidhogg.studyspringproject.application.dto.user;
 
+import com.nidhogg.studyspringproject.domain.model.user.Role;
 
-import javax.persistence.*;
+public class UserDto {
 
-@Entity
-@Table(name = "USER")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
     private Long id;
-
-    @Column(name = "EMAIL")
     private String email;
-
-    @Column(name = "PASSWORD")
     private String password;
-
-    @Column(name = "ROLE")
     private Role role;
 
-    public User() {
-        // JPA constructor
+    public UserDto() {
     }
 
-    public User(String email, String password, Role role) {
+    public UserDto(Long id, String email, String password, Role role) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -65,7 +53,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserDto{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
