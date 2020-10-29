@@ -15,7 +15,6 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, properties = "spring.h2.console.enabled=true")
-@FlywayTest
 @DBUnitSupport(loadFilesForRun = {"INSERT", "/testdata/user.xml"})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class, FlywayDBUnitTestExecutionListener.class})
 public class UserRepositoryIntegrationTest {
