@@ -6,7 +6,6 @@ import com.nidhogg.studyspringproject.application.exception.EmailExistsException
 import com.nidhogg.studyspringproject.application.mapper.user.UserMapper;
 import com.nidhogg.studyspringproject.domain.model.user.User;
 import com.nidhogg.studyspringproject.domain.repository.user.UserRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
