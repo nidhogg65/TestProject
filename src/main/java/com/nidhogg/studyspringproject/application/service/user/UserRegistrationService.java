@@ -13,14 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class RegistrationUserService {
+public class UserRegistrationService {
 
     private UserRepository userRepository;
     private UserMapper userMapper;
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public RegistrationUserService(UserRepository userRepository, UserMapper userMapper, PasswordEncoder passwordEncoder) {
+    public UserRegistrationService(UserRepository userRepository, UserMapper userMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.passwordEncoder = passwordEncoder;

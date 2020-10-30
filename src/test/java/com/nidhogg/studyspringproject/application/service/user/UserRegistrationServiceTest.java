@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class RegistrationUserServiceTest {
+class UserRegistrationServiceTest {
 
     private static final String DEFAULT_EMAIL = "test@test.com";
     private static final String DEFAULT_PASSWORD = "1q2w3e";
@@ -35,7 +35,7 @@ class RegistrationUserServiceTest {
     private PasswordEncoder passwordEncoder;
 
     @InjectMocks
-    private RegistrationUserService service;
+    private UserRegistrationService service;
 
     @Test
     void shouldReturnNewUserDto_whenRegisterNewUser_givenRegistrationUserDtoWithNotExistingEmail() {

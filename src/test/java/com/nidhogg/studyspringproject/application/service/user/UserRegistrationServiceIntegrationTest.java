@@ -13,13 +13,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, properties = "spring.h2.console.enabled=true")
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class})
-class RegistrationUserServiceIntegrationTest {
+class UserRegistrationServiceIntegrationTest {
 
     private static final String DEFAULT_EMAIL = "test@test.com";
     private static final String DEFAULT_PASSWORD = "1q2w3e";
 
     @Autowired
-    private RegistrationUserService service;
+    private UserRegistrationService service;
 
     @Test
     void shouldThrowEmailExistsException_whenRegisterNewUser_givenRegistrationUserDtoWithAlreadyExistingEmail() {
