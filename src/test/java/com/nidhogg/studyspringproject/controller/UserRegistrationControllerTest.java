@@ -39,6 +39,8 @@ class UserRegistrationControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/rest/api/v1/users")
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(givenUser)))
+
+                //then
                 .andExpect(status().isCreated());
     }
 

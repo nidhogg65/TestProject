@@ -22,7 +22,7 @@ class UserRegistrationServiceIntegrationTest {
     private UserRegistrationService service;
 
     @Test
-    void shouldThrowEmailExistsException_whenRegisterNewUser_givenRegistrationUserDtoWithAlreadyExistingEmail() {
+    void shouldReturnNewUserDto_whenRegisterNewUser_givenRegistrationUserDtoWithNotExistingEmail() {
         // given
         RegistrationUserDto givenUser = new RegistrationUserDto(DEFAULT_EMAIL, DEFAULT_PASSWORD, USER);
 
