@@ -9,11 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static com.nidhogg.studyspringproject.common.matcher.ResponseBodyMatchers.responseBody;
 import static com.nidhogg.studyspringproject.domain.model.user.Role.USER;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -52,12 +51,11 @@ class UserRegistrationControllerTest {
         given(registrationService.registerNewUser(refEq(givenUser))).willReturn(expectedResult);
 
         // when
-        MvcResult actualResult = mockMvc.perform(MockMvcRequestBuilders.post("/rest/api/v1/users")
+        mockMvc.perform(MockMvcRequestBuilders.post("/rest/api/v1/users")
                 .contentType("application/json")
-                .content(objectMapper.writeValueAsString(givenUser))).andReturn();
-        String actualResultAsString = actualResult.getResponse().getContentAsString();
+                .content(objectMapper.writeValueAsString(givenUser)))
 
-        // then
-        assertThat(actualResultAsString).isEqualTo(objectMapper.writeValueAsString(expectedResult));
+                // then
+                .andExpect(responseBody().containsObjectAsJson(expectedResult, UserDto.class));
     }
 }
