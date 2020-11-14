@@ -28,7 +28,7 @@ public class UserRegistrationService {
 
     public UserDto registerNewUser(RegistrationUserDto newUserDto) {
         if (userRepository.existsUserByEmail(newUserDto.getEmail())) {
-            throw new EmailExistsException("Account with that email address: " + newUserDto.getEmail() + " already exists.");
+            throw new EmailExistsException(newUserDto.getEmail());
         }
 
         User newUser = new User();
