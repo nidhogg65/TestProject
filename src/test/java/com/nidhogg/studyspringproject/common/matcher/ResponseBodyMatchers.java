@@ -1,12 +1,15 @@
 package com.nidhogg.studyspringproject.common.matcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResponseBodyMatchers {
-    private ObjectMapper objectMapper = new ObjectMapper();
+
+    private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
+
 
     public <T> ResultMatcher containsObjectAsJson(Object expectedObject, Class<T> targetClass) {
         return mvcResult -> {

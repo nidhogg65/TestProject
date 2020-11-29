@@ -10,18 +10,21 @@ public class ApiError {
     private LocalDateTime timestamp;
     private String message;
 
-    private ApiError() {
-        this.timestamp = LocalDateTime.now();
+    public ApiError() {
     }
 
-    public ApiError(HttpStatus status) {
-        this();
-        this.status = status;
+    public ApiError(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 
-    public ApiError(HttpStatus status, String message) {
-        this();
+    public ApiError(HttpStatus status, LocalDateTime timestamp) {
         this.status = status;
+        this.timestamp = timestamp;
+    }
+
+    public ApiError(HttpStatus status, LocalDateTime timestamp, String message) {
+        this.status = status;
+        this.timestamp = timestamp;
         this.message = message;
     }
 
@@ -29,11 +32,32 @@ public class ApiError {
         return status;
     }
 
+    public void setStatus(HttpStatus status) {
+        this.status = status;
+    }
+
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public String getMessage() {
         return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return "ApiError{" +
+                "status=" + status +
+                ", timestamp=" + timestamp +
+                ", message='" + message + '\'' +
+                '}';
     }
 }
