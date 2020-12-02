@@ -1,5 +1,7 @@
 package com.nidhogg.studyspringproject.config.security;
 
+import com.nidhogg.studyspringproject.authentication.CustomBasicAuthenticationEntryPoint;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private CustomBasicAuthenticationEntryPoint authenticationEntryPoint;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //TODO: set auth provider
@@ -18,8 +23,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/").permitAll().and()
-                .authorizeRequests().antMatchers("/h2-console/**").permitAll();
+        http.authorizeRequests()
+                .antMatchers("/h2-console/**").permitAll()
+                .anyRequest().authenticated()
+                .and().httpBasic()
+        .authenticationEntryPoint(authenticationEntryPoint);
+
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }
