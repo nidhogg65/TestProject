@@ -3,7 +3,6 @@ package com.nidhogg.studyspringproject.domain.repository.user;
 
 import com.nidhogg.studyspringproject.domain.model.user.Role;
 import com.nidhogg.studyspringproject.domain.model.user.User;
-import org.flywaydb.test.annotation.FlywayTest;
 import org.flywaydb.test.dbunit.DBUnitSupport;
 import org.flywaydb.test.dbunit.FlywayDBUnitTestExecutionListener;
 import org.junit.jupiter.api.Test;
@@ -11,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,7 +24,7 @@ public class UserRepositoryIntegrationTest {
     private UserRepository userRepository;
 
     @Test
-    public void shouldReturnUser_whenFindByEmail_givenExistingEmail() {
+    public void shouldReturnOptionalWithUser_whenFindByEmail_givenExistingEmail() {
         //given
         User expectedUser = new User();
         expectedUser.setId(1L);
@@ -32,10 +33,19 @@ public class UserRepositoryIntegrationTest {
         expectedUser.setRole(Role.ADMIN);
 
         // when
-        User actualUser = userRepository.findByEmail("test1@gmail.com");
+        Optional<User> actualUser = userRepository.findByEmail("test1@gmail.com");
 
         // then
-        assertThat(actualUser).isEqualToComparingFieldByField(expectedUser);
+        assertThat(actualUser).usingFieldByFieldValueComparator().contains(expectedUser);
+    }
+
+    @Test
+    public void shouldReturnEmptyOptional_whenFindByEmail_givenNotExistingEmail() {
+        // when
+        Optional<User> actualUser = userRepository.findByEmail("notExisting@gmail.com");
+
+        // then
+        assertThat(actualUser).isEmpty();
     }
 
     @Test
