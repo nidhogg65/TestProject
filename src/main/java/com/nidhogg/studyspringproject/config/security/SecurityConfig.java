@@ -17,12 +17,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CustomBasicAuthenticationEntryPoint authenticationEntryPoint;
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //TODO: set auth provider
-        super.configure(auth);
-    }
-
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/rest/api/v1/users").permitAll()
@@ -30,7 +24,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and().httpBasic()
                 .authenticationEntryPoint(authenticationEntryPoint);
-
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }
