@@ -34,3 +34,7 @@ build/
 
 ### Embedded H2 ###
 /data
+
+### log files/archives###
+*.log
+*.gz
