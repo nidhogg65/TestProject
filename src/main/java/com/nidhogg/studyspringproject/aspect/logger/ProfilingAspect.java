@@ -13,29 +13,30 @@ import org.springframework.util.StopWatch;
 @Aspect
 public class ProfilingAspect {
 
-    @Pointcut("execution(* registerNewUser(..))")
-    private void profileUserRegistration() {
+    @Pointcut("@annotation(com.nidhogg.studyspringproject.annotation.ProfilePerformance)")
+    private void atProfiledMethod() {
     }
 
-    @Pointcut("within(com.nidhogg.studyspringproject.application.service..*)")
-    private void inService() {
+    @Pointcut("@within(com.nidhogg.studyspringproject.annotation.ProfilePerformance)")
+    private void atProfiledClass() {
     }
 
-    @Around("profileUserRegistration() && inService()")
+    @Around("atProfiledMethod() || atProfiledClass()")
     public Object profileMethod(ProceedingJoinPoint pjp) throws Throwable {
         StopWatch stopWatch = new StopWatch(getClass().getSimpleName());
 
-        stopWatch.start(pjp.getSignature().getName());
-        Object result = pjp.proceed();
-        stopWatch.stop();
+        try {
+            stopWatch.start(pjp.getSignature().getName());
+            return pjp.proceed();
 
-        log.info(classMethodString(pjp) + " method invocation has taken " + stopWatch.getTotalTimeMillis() + " milliseconds.");
-        return result;
+        } finally {
+            stopWatch.stop();
+            log.info(classMethodString(pjp) + " method invocation has taken " + stopWatch.getTotalTimeMillis() + " milliseconds.");
+        }
     }
 
     private String classMethodString(ProceedingJoinPoint pjp) {
         return pjp.getTarget().getClass().getSimpleName() + "." + pjp.getSignature().getName();
     }
-
 
 }

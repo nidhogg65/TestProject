@@ -1,5 +1,6 @@
 package com.nidhogg.studyspringproject.application.service.user;
 
+import com.nidhogg.studyspringproject.annotation.ProfilePerformance;
 import com.nidhogg.studyspringproject.application.dto.user.RegistrationUserDto;
 import com.nidhogg.studyspringproject.application.dto.user.UserDto;
 import com.nidhogg.studyspringproject.application.exception.EmailExistsException;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@ProfilePerformance
 @Service
 @Transactional
 public class UserRegistrationService implements UserDetailsService {
@@ -42,7 +44,6 @@ public class UserRegistrationService implements UserDetailsService {
 
         return userMapper.toDto(userRepository.save(newUser));
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
