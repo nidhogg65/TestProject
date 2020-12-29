@@ -1,7 +1,7 @@
 package com.nidhogg.studyspringproject.controller;
 
-import com.nidhogg.studyspringproject.application.dto.error.ApiError;
-import com.nidhogg.studyspringproject.application.dto.error.ApiErrorFactory;
+import com.nidhogg.studyspringproject.dto.error.ApiError;
+import com.nidhogg.studyspringproject.factory.ApiErrorFactory;
 import com.nidhogg.studyspringproject.application.exception.EmailExistsException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

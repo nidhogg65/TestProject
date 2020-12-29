@@ -1,5 +1,6 @@
-package com.nidhogg.studyspringproject.application.dto.error;
+package com.nidhogg.studyspringproject.factory;
 
+import com.nidhogg.studyspringproject.dto.error.ApiError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;

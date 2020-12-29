@@ -1,6 +1,6 @@
 package com.nidhogg.studyspringproject.application.mapper.user;
 
-import com.nidhogg.studyspringproject.application.dto.user.UserDto;
+import com.nidhogg.studyspringproject.dto.user.UserDto;
 import com.nidhogg.studyspringproject.domain.model.user.Role;
 import com.nidhogg.studyspringproject.domain.model.user.User;
 import org.junit.jupiter.api.Test;

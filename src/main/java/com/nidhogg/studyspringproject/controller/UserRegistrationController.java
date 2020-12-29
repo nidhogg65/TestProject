@@ -1,8 +1,8 @@
 package com.nidhogg.studyspringproject.controller;
 
-import com.nidhogg.studyspringproject.application.dto.user.RegistrationUserDto;
-import com.nidhogg.studyspringproject.application.dto.user.UserDto;
-import com.nidhogg.studyspringproject.application.service.user.UserRegistrationService;
+import com.nidhogg.studyspringproject.dto.user.RegistrationUserDto;
+import com.nidhogg.studyspringproject.dto.user.UserDto;
+import com.nidhogg.studyspringproject.service.user.UserRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

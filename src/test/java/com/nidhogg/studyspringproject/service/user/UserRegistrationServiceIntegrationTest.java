@@ -1,7 +1,7 @@
-package com.nidhogg.studyspringproject.application.service.user;
+package com.nidhogg.studyspringproject.service.user;
 
-import com.nidhogg.studyspringproject.application.dto.user.RegistrationUserDto;
-import com.nidhogg.studyspringproject.application.dto.user.UserDto;
+import com.nidhogg.studyspringproject.dto.user.RegistrationUserDto;
+import com.nidhogg.studyspringproject.dto.user.UserDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

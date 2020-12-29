@@ -1,4 +1,4 @@
-package com.nidhogg.studyspringproject.application.dto.user;
+package com.nidhogg.studyspringproject.dto.user;
 
 import com.nidhogg.studyspringproject.domain.model.user.Role;
 

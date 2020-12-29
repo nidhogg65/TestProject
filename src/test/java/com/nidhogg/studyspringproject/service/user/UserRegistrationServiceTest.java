@@ -1,7 +1,7 @@
-package com.nidhogg.studyspringproject.application.service.user;
+package com.nidhogg.studyspringproject.service.user;
 
-import com.nidhogg.studyspringproject.application.dto.user.RegistrationUserDto;
-import com.nidhogg.studyspringproject.application.dto.user.UserDto;
+import com.nidhogg.studyspringproject.dto.user.RegistrationUserDto;
+import com.nidhogg.studyspringproject.dto.user.UserDto;
 import com.nidhogg.studyspringproject.application.exception.EmailExistsException;
 import com.nidhogg.studyspringproject.application.mapper.user.UserMapper;
 import com.nidhogg.studyspringproject.domain.model.user.User;

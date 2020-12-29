@@ -1,8 +1,8 @@
 package com.nidhogg.studyspringproject.security.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nidhogg.studyspringproject.application.dto.error.ApiError;
-import com.nidhogg.studyspringproject.application.dto.error.ApiErrorFactory;
+import com.nidhogg.studyspringproject.dto.error.ApiError;
+import com.nidhogg.studyspringproject.factory.ApiErrorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;

@@ -1,11 +1,11 @@
 package com.nidhogg.studyspringproject.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nidhogg.studyspringproject.application.dto.error.ApiError;
-import com.nidhogg.studyspringproject.application.dto.user.RegistrationUserDto;
-import com.nidhogg.studyspringproject.application.dto.user.UserDto;
+import com.nidhogg.studyspringproject.dto.error.ApiError;
+import com.nidhogg.studyspringproject.dto.user.RegistrationUserDto;
+import com.nidhogg.studyspringproject.dto.user.UserDto;
 import com.nidhogg.studyspringproject.application.exception.EmailExistsException;
-import com.nidhogg.studyspringproject.application.service.user.UserRegistrationService;
+import com.nidhogg.studyspringproject.service.user.UserRegistrationService;
 import com.nidhogg.studyspringproject.config.TestBeansConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

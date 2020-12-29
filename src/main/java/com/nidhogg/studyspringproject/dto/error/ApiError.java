@@ -1,4 +1,4 @@
-package com.nidhogg.studyspringproject.application.dto.error;
+package com.nidhogg.studyspringproject.dto.error;
 
 import org.springframework.http.HttpStatus;
 
