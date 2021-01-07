@@ -1,12 +1,15 @@
 package com.nidhogg.studyspringproject.domain.model.transaction;
 
 import com.nidhogg.studyspringproject.domain.model.account.Account;
+import com.nidhogg.studyspringproject.domain.model.common.Creatable;
+import com.nidhogg.studyspringproject.domain.model.common.EntityListener;
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@EntityListeners(EntityListener.class)
 @Entity
 @Table(name = "TRANSACTION")
 @Getter
@@ -14,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Transaction {
+public class Transaction implements Creatable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -37,6 +40,11 @@ public class Transaction {
     @Column(name = "CATEGORY")
     private Category category;
 
-    @Column(name = "TIMESTAMP")
-    private LocalDateTime timestamp;
+    @Column(name = "CREATED_AT")
+    private LocalDateTime createdAt;
+
+    @Override
+    public void setCreationTimestamp(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }

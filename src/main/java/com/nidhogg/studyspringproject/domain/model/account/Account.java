@@ -4,8 +4,8 @@ import com.nidhogg.studyspringproject.domain.model.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.persistence.*;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -28,4 +28,12 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User accountHolder;
+
+    public void addMoney(BigDecimal augend) {
+        this.amount = this.amount.add(augend);
+    }
+
+    public void subtractMoney(BigDecimal subtrahend) {
+        this.amount = this.amount.subtract(subtrahend);
+    }
 }
