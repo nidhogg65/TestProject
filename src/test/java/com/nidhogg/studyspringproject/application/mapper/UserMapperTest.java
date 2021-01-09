@@ -1,4 +1,4 @@
-package com.nidhogg.studyspringproject.application.mapper.user;
+package com.nidhogg.studyspringproject.application.mapper;
 
 import com.nidhogg.studyspringproject.dto.user.UserDto;
 import com.nidhogg.studyspringproject.domain.model.user.Role;

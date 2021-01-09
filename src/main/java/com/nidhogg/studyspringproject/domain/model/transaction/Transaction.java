@@ -3,7 +3,9 @@ package com.nidhogg.studyspringproject.domain.model.transaction;
 import com.nidhogg.studyspringproject.domain.model.account.Account;
 import com.nidhogg.studyspringproject.domain.model.common.Creatable;
 import com.nidhogg.studyspringproject.domain.model.common.EntityListener;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,8 +17,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Transaction implements Creatable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +42,15 @@ public class Transaction implements Creatable {
 
     @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;
+
+    public Transaction(Account accountFrom, Account accountTo, BigDecimal amount, TransactionType type,
+                       Category category) {
+        this.accountFrom = accountFrom;
+        this.accountTo = accountTo;
+        this.amount = amount;
+        this.type = type;
+        this.category = category;
+    }
 
     @Override
     public void setCreationTimestamp(LocalDateTime createdAt) {

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class AccountService {
@@ -37,5 +38,13 @@ public class AccountService {
                 createdAccount.getAmount(),
                 createdAccount.getCurrency(),
                 createdAccount.getAccountHolder().getId());
+    }
+
+    // TODO: Add validation
+    @Transactional
+    public void executeMoneyTransfer(Account sourceAccount, Account targetAccount, BigDecimal amount) {
+        sourceAccount.subtractMoney(amount);
+        targetAccount.addMoney(amount);
+        accountRepository.saveAll(List.of(sourceAccount, targetAccount));
     }
 }
