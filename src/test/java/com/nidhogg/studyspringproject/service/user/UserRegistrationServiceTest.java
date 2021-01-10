@@ -1,11 +1,11 @@
 package com.nidhogg.studyspringproject.service.user;
 
-import com.nidhogg.studyspringproject.dto.user.RegistrationUserDto;
-import com.nidhogg.studyspringproject.dto.user.UserDto;
 import com.nidhogg.studyspringproject.application.exception.EmailExistsException;
 import com.nidhogg.studyspringproject.application.mapper.UserMapper;
 import com.nidhogg.studyspringproject.domain.model.user.User;
 import com.nidhogg.studyspringproject.domain.repository.user.UserRepository;
+import com.nidhogg.studyspringproject.dto.user.RegistrationUserDto;
+import com.nidhogg.studyspringproject.dto.user.UserDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -84,7 +84,6 @@ class UserRegistrationServiceTest {
 
     private UserDto provideCreatedUserDto() {
         UserDto user = new UserDto();
-        user.setId(1L);
         user.setEmail(DEFAULT_EMAIL);
         user.setPassword(DEFAULT_PASSWORD);
         user.setRole(USER);

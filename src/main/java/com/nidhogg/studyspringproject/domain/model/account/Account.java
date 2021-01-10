@@ -3,6 +3,7 @@ package com.nidhogg.studyspringproject.domain.model.account;
 import com.nidhogg.studyspringproject.domain.model.common.BaseDomainEntity;
 import com.nidhogg.studyspringproject.domain.model.common.EntityListener;
 import com.nidhogg.studyspringproject.domain.model.user.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +17,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Account extends BaseDomainEntity {
 
     @Column(name = "AMOUNT")

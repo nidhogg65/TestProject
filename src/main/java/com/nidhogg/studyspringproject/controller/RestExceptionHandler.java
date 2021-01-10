@@ -1,5 +1,6 @@
 package com.nidhogg.studyspringproject.controller;
 
+import com.nidhogg.studyspringproject.application.exception.EntityNotFoundException;
 import com.nidhogg.studyspringproject.dto.error.ApiError;
 import com.nidhogg.studyspringproject.factory.ApiErrorFactory;
 import com.nidhogg.studyspringproject.application.exception.EmailExistsException;
@@ -29,6 +30,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(EmailExistsException.class)
     protected ApiError handleEmailExistsException(EmailExistsException exception) {
+        log.error(exception.getMessage(), exception);
+        return errorFactory.produceApiErrorWithStatusAndMessage(HttpStatus.CONFLICT, exception.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(EntityNotFoundException.class)
+    protected ApiError handleEntityNotFoundException(EntityNotFoundException exception) {
         log.error(exception.getMessage(), exception);
         return errorFactory.produceApiErrorWithStatusAndMessage(HttpStatus.CONFLICT, exception.getMessage());
     }

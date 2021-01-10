@@ -1,12 +1,12 @@
 package com.nidhogg.studyspringproject.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nidhogg.studyspringproject.application.exception.EmailExistsException;
+import com.nidhogg.studyspringproject.config.TestBeansConfig;
 import com.nidhogg.studyspringproject.dto.error.ApiError;
 import com.nidhogg.studyspringproject.dto.user.RegistrationUserDto;
 import com.nidhogg.studyspringproject.dto.user.UserDto;
-import com.nidhogg.studyspringproject.application.exception.EmailExistsException;
 import com.nidhogg.studyspringproject.service.user.UserRegistrationService;
-import com.nidhogg.studyspringproject.config.TestBeansConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -56,7 +56,7 @@ class UserRegistrationControllerTest {
     void shouldReturnUserDto_whenUsersPostRequest_givenValidRegistrationUserDto() throws Exception {
         // given
         RegistrationUserDto givenUser = new RegistrationUserDto("test@test.com", "1q2w3e", USER);
-        UserDto expectedResult = new UserDto(1L, UUID.randomUUID(),"test@test.com", "1q2w3e", USER);
+        UserDto expectedResult = new UserDto(UUID.randomUUID().toString(), "test@test.com", "1q2w3e", USER);
         given(registrationService.registerNewUser(refEq(givenUser))).willReturn(expectedResult);
 
         // when
@@ -72,7 +72,8 @@ class UserRegistrationControllerTest {
     void shouldReturnApiErrorWithHttpsStatus409_whenUsersPostRequest_givenAlreadyExistingEmail() throws Exception {
         // given
         RegistrationUserDto givenUser = new RegistrationUserDto("test@test.com", "1q2w3e", USER);
-        given(registrationService.registerNewUser(refEq(givenUser))).willThrow(new EmailExistsException("test@test.com"));
+        given(registrationService.registerNewUser(refEq(givenUser))).willThrow(new EmailExistsException("test@test" +
+                ".com"));
 
         ApiError expectedError = new ApiError(
                 HttpStatus.CONFLICT,
