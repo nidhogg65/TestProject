@@ -1,6 +1,7 @@
 package com.nidhogg.studyspringproject.domain.model.transaction;
 
 import com.nidhogg.studyspringproject.domain.model.account.Account;
+import com.nidhogg.studyspringproject.domain.model.common.BaseDomainEntity;
 import com.nidhogg.studyspringproject.domain.model.common.Creatable;
 import com.nidhogg.studyspringproject.domain.model.common.EntityListener;
 import lombok.Getter;
@@ -17,11 +18,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Transaction implements Creatable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private Long id;
+public class Transaction extends BaseDomainEntity implements Creatable {
 
     @ManyToOne
     @JoinColumn(name = "ACCOUNT_ID_FROM")

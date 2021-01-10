@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import static com.nidhogg.studyspringproject.common.matcher.ResponseBodyMatchers.responseBody;
 import static com.nidhogg.studyspringproject.domain.model.user.Role.USER;
@@ -55,7 +56,7 @@ class UserRegistrationControllerTest {
     void shouldReturnUserDto_whenUsersPostRequest_givenValidRegistrationUserDto() throws Exception {
         // given
         RegistrationUserDto givenUser = new RegistrationUserDto("test@test.com", "1q2w3e", USER);
-        UserDto expectedResult = new UserDto(1L, "test@test.com", "1q2w3e", USER);
+        UserDto expectedResult = new UserDto(1L, UUID.randomUUID(),"test@test.com", "1q2w3e", USER);
         given(registrationService.registerNewUser(refEq(givenUser))).willReturn(expectedResult);
 
         // when
