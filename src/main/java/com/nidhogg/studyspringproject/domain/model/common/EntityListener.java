@@ -12,7 +12,7 @@ public class EntityListener {
             ((Creatable) entity).setCreationTimestamp(LocalDateTime.now());
         }
         if (entity instanceof BaseDomainEntity) {
-            ((BaseDomainEntity) entity).setUuid(UUID.randomUUID());
+            ((BaseDomainEntity) entity).setUuid(UUID.randomUUID().toString());
         }
     }
 }

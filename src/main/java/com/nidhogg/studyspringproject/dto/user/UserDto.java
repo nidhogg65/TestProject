@@ -1,9 +1,8 @@
 package com.nidhogg.studyspringproject.dto.user;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.nidhogg.studyspringproject.domain.model.user.Role;
 import lombok.*;
-
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -11,9 +10,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @ToString
 public class UserDto {
-
-    private Long id;
-    private UUID uuid;
+    @JsonProperty("id")
+    private String uuid;
     private String email;
     private String password;
     private Role role;
