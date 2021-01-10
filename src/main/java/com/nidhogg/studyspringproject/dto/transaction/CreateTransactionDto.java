@@ -20,11 +20,11 @@ public class CreateTransactionDto {
 
     @JsonProperty("account_id_from")
     @NotNull
-    private Long accountIdFrom;
+    private String accountUuidFrom;
 
     @JsonProperty("account_id_to")
     @NotNull
-    private Long accountIdTo;
+    private String accountUuidTo;
 
     @Positive
     @NotNull

@@ -14,12 +14,12 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class TransactionDto {
-
-    private Long id;
+    @JsonProperty("id")
+    private String uuid;
     @JsonProperty("account_id_from")
-    private Long accountIdFrom;
+    private String accountUuidFrom;
     @JsonProperty("account_id_to")
-    private Long accountIdTo;
+    private String accountUuidTo;
     private BigDecimal amount;
     private TransactionType type;
     private Category category;

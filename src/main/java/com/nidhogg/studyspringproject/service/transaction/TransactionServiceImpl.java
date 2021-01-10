@@ -1,5 +1,6 @@
 package com.nidhogg.studyspringproject.service.transaction;
 
+import com.nidhogg.studyspringproject.application.exception.EntityNotFoundException;
 import com.nidhogg.studyspringproject.application.mapper.TransactionMapper;
 import com.nidhogg.studyspringproject.domain.model.account.Account;
 import com.nidhogg.studyspringproject.domain.model.transaction.Transaction;
@@ -30,8 +31,10 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Transactional
     public TransactionDto create(CreateTransactionDto createTransactionDto) {
-        Account accountFrom = accountRepository.getOne(createTransactionDto.getAccountIdFrom());
-        Account accountTo = accountRepository.getOne(createTransactionDto.getAccountIdTo());
+        Account accountFrom = accountRepository.findByUuid(createTransactionDto.getAccountUuidFrom())
+                .orElseThrow(() -> new EntityNotFoundException(Account.class));
+        Account accountTo = accountRepository.findByUuid(createTransactionDto.getAccountUuidTo())
+                .orElseThrow(() -> new EntityNotFoundException(Account.class));
 
         accountService.executeMoneyTransfer(accountFrom, accountTo, createTransactionDto.getAmount());
 

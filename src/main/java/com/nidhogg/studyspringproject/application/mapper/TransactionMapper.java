@@ -9,9 +9,9 @@ public class TransactionMapper {
 
     public TransactionDto toDto(Transaction transaction) {
         TransactionDto transactionDto = new TransactionDto();
-        transactionDto.setId(transaction.getId());
-        transactionDto.setAccountIdFrom(transaction.getAccountFrom().getId());
-        transactionDto.setAccountIdTo(transaction.getAccountTo().getId());
+        transactionDto.setUuid(transaction.getUuid());
+        transactionDto.setAccountUuidFrom(transaction.getAccountFrom().getUuid());
+        transactionDto.setAccountUuidTo(transaction.getAccountTo().getUuid());
         transactionDto.setAmount(transaction.getAmount());
         transactionDto.setType(transaction.getType());
         transactionDto.setCategory(transaction.getCategory());
