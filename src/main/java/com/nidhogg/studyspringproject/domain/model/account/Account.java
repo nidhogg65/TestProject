@@ -26,7 +26,7 @@ public class Account extends BaseDomainEntity {
     @Column(name = "CURRENCY")
     private AccountCurrency currency;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User accountHolder;
 

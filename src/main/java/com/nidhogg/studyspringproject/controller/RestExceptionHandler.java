@@ -1,9 +1,11 @@
 package com.nidhogg.studyspringproject.controller;
 
+import com.nidhogg.studyspringproject.application.exception.AccountDoesNotExistForUserException;
+import com.nidhogg.studyspringproject.application.exception.EmailExistsException;
 import com.nidhogg.studyspringproject.application.exception.EntityNotFoundException;
+import com.nidhogg.studyspringproject.application.exception.NotEnoughMoneyException;
 import com.nidhogg.studyspringproject.dto.error.ApiError;
 import com.nidhogg.studyspringproject.factory.ApiErrorFactory;
-import com.nidhogg.studyspringproject.application.exception.EmailExistsException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
@@ -34,15 +36,31 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return errorFactory.produceApiErrorWithStatusAndMessage(HttpStatus.CONFLICT, exception.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.CONFLICT)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(EntityNotFoundException.class)
     protected ApiError handleEntityNotFoundException(EntityNotFoundException exception) {
         log.error(exception.getMessage(), exception);
-        return errorFactory.produceApiErrorWithStatusAndMessage(HttpStatus.CONFLICT, exception.getMessage());
+        return errorFactory.produceApiErrorWithStatusAndMessage(HttpStatus.BAD_REQUEST, exception.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NotEnoughMoneyException.class)
+    protected ApiError handleNotEnoughMoneyException(NotEnoughMoneyException exception) {
+        log.error(exception.getMessage(), exception);
+        return errorFactory.produceApiErrorWithStatusAndMessage(HttpStatus.BAD_REQUEST, exception.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(AccountDoesNotExistForUserException.class)
+    protected ApiError handleAccountDoesNotExistForUserException(AccountDoesNotExistForUserException exception) {
+        log.error(exception.getMessage(), exception);
+        return errorFactory.produceApiErrorWithStatusAndMessage(HttpStatus.BAD_REQUEST, exception.getMessage());
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                                  HttpHeaders headers, HttpStatus status,
+                                                                  WebRequest request) {
         log.error("Error occurred during bean validation.", ex);
         ApiError error = errorFactory.produceApiErrorWithStatusAndMessage(status, ex.getMessage());
         return new ResponseEntity<>(error, headers, status);

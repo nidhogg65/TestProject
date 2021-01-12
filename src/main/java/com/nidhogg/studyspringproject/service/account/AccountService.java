@@ -8,6 +8,7 @@ import com.nidhogg.studyspringproject.domain.repository.account.AccountRepositor
 import com.nidhogg.studyspringproject.domain.repository.user.UserRepository;
 import com.nidhogg.studyspringproject.dto.account.AccountDto;
 import com.nidhogg.studyspringproject.dto.account.CreateAccountDto;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,19 +16,13 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class AccountService {
 
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;
     private final AccountMapper accountMapper;
-
-    public AccountService(AccountRepository accountRepository,
-                          UserRepository userRepository,
-                          AccountMapper accountMapper) {
-        this.accountRepository = accountRepository;
-        this.userRepository = userRepository;
-        this.accountMapper = accountMapper;
-    }
+    private final AccountValidator accountValidator;
 
     @Transactional
     public AccountDto create(String userUuid, CreateAccountDto createAccountDto) {
@@ -39,9 +34,10 @@ public class AccountService {
         return accountMapper.toDto(createdAccount);
     }
 
-    // TODO: Add validation
     @Transactional
     public void executeMoneyTransfer(Account sourceAccount, Account targetAccount, BigDecimal amount) {
+        accountValidator.validateSenderAccount(sourceAccount, amount);
+
         sourceAccount.subtractMoney(amount);
         targetAccount.addMoney(amount);
         accountRepository.saveAll(List.of(sourceAccount, targetAccount));
